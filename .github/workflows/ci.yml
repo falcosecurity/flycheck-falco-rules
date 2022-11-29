@@ -1,0 +1,48 @@
+name: CI Build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - 'release/**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        emacs-version:
+          - 26.3
+    steps:
+      - name: Set up emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs-version }}
+      - name: Install falco
+        run: |
+          sudo apt-get update
+          curl -s https://falco.org/repo/falcosecurity-3672BA8F.asc | sudo apt-key add -
+          echo "deb https://download.falco.org/packages/deb stable main" | sudo tee -a /etc/apt/sources.list.d/falcosecurity.list
+          sudo apt-get update -y
+          sudo apt-get -y install linux-headers-$(uname -r)
+          sudo apt-get install -y falco
+      - name: Output emacs version
+        run: |
+          emacs --version
+      - name: Set up cask
+        uses: cask/setup-cask@master
+        with:
+          version: 0.8.4
+      - name: Output cask version
+        run: |
+          cask --version
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install all packages specified in the Cask-file
+        run: |
+          cask install
+      - name: Run tests
+        run: |
+          make test

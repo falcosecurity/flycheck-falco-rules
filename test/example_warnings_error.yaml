@@ -1,0 +1,35 @@
+# A Rules File With a Mix of Warnings and Errors
+
+- not_a_real_item: indeed
+
+- list: unused_list
+  items: [one, two, three]
+
+- macro: unused_macro
+  condition: evt.type=execve
+
+- rule: no_evttype
+  desc: No evttype at all
+  condition: proc.name=foo
+  output: "None"
+  priority: WARNING
+
+- rule: unknown_source
+  desc: A rule with an unknown source
+  condition: cloud.name=my-cloud
+  output: Some event in my-cloud
+  priority: DEBUG
+  source: my-cloud
+
+- rule: unknown_field_warning
+  desc: A rule with an unknown field (is warning due to skip-if-unknown-filter)
+  condition: evt.type=execve and proc.nobody=/bin/sh
+  output: An exec involving /bin/sh (command=%proc.cmdline container=%container.id image=%container.image.repository)
+  priority: INFO
+  skip-if-unknown-filter: true
+
+- rule: Rule with Invalid Condition
+  desc: A rule with an invalid condition
+  condition: evt.type=execve and not-a-field=/bin/sh
+  output: An exec involving /bin/sh (command=%proc.cmdline container=%container.id image=%container.image.repository)
+  priority: INFO
