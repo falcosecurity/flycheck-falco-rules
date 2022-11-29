@@ -1,4 +1,4 @@
-;; flycheck-falco-rules.el --- On-the-fly syntax checking for falco rules files
+;;; flycheck-falco-rules.el --- On-the-fly syntax checking for falco rules files -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2022 The Falco Authors.
 ;;
@@ -16,17 +16,25 @@
 ;; limitations under the License.
 ;;
 
+;; Author: The Falco Developers (https://falco.org)
+;; URL: https://github.com/falcosecurity/flycheck-falco-rules
+;; Keywords: tools, convenience
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "24.3") (flycheck "0.25") (let-alist "1.0.1"))
+
 ;;; Commentary:
 
 ;; Flycheck checker for Falco Rules Files.
 
 ;;; Code:
 
+(require 'flycheck)
+
 (defcustom flycheck-falco-rules-validate-command
   "docker run --rm -v/tmp:/tmp falcosecurity/falco-no-driver falco -o json_output=True -V"
   "The command and arguments to use to validate the falco rules content.
 The default uses 'docker run' to run a falco-no-driver container
-with the -V argument. The file to be validated will be appended to
+with the -V argument.  The file to be validated will be appended to
 the end of this command line"
   :type 'string
   :group 'flycheck-falco-rules)
@@ -46,7 +54,7 @@ CHECKER, BUFFER and FILENAME are provided from a call to
 flycheck-falco-rules-parse.  ERROR_OR_WARNING_OBJ is from
  a falco yaml json object.  KIND is either warning or error."
   (let-alist error_or_warning_obj
-    (let ((code .code) (codedesc .codedesc) (message .message))
+    (let ((code .code) (message .message))
       (let-alist .context
 	(let-alist (flycheck-falco-rules-find-last-location .locations)
 	  (let-alist .position
@@ -86,5 +94,11 @@ about Falco."
   :error-parser 'flycheck-falco-rules-parse
   
   :modes '(yaml-mode))
+
+(defun flycheck-falco-rules-setup ()
+  "Set up Flycheck for Falco Rules files."
+  (add-to-list 'flycheck-checkers 'falco-rules))
+
+(provide 'flycheck-falco-rules)
 
 ;;; flycheck-falco-rules.el ends here
