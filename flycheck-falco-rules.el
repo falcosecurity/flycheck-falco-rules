@@ -95,6 +95,7 @@ about Falco."
   
   :modes '(yaml-mode))
 
+;;;###autoload
 (defun flycheck-falco-rules-setup ()
   "Set up Flycheck for Falco Rules files."
   (add-to-list 'flycheck-checkers 'falco-rules))
