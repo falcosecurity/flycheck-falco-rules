@@ -6,9 +6,29 @@ A custom checker for Falco rules files that can be loaded using the [Flycheck](h
 
 ## Setup
 
+### Prerequsites
+
+First, [install](https://www.flycheck.org/en/latest/user/installation.html) and [enable](https://www.flycheck.org/en/latest/user/quickstart.html) Flycheck if not already installed.
+
 The default configuration for this integration relies on running Falco via [docker](https://falco.org/docs/getting-started/running/#docker).
 
-1. [Install](https://www.flycheck.org/en/latest/user/installation.html) and [enable](https://www.flycheck.org/en/latest/user/quickstart.html) Flycheck if not already installed.
+### Installation Using MELPA
+
+This checker is available on [MELPA](https://melpa.org/). Assuming you already have MELPA configured as a package source, it can be installed via:
+
+```
+M-x package-install RET flycheck-falco-rules RET
+```
+
+And then add the following to your `.emacs` file:
+
+```
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-falco-rules-setup))
+```
+
+### Manual Installation
+
 1. Copy `flycheck-falco-rules.el` locally (for example, `~/elisp/flycheck-falco-rules.el`)
 1. Add the following to your `.emacs` file:
 
