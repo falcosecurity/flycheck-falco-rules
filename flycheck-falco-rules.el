@@ -71,7 +71,7 @@ flycheck-falco-rules-parse.  ERROR_OR_WARNING_OBJ is from
     "Parse Falco Rules errors/warnings from Falco's validate json output.
 CHECKER and BUFFER denote the CHECKER that returned OUTPUT and
 the BUFFER that was checked respectively.
-See URL `https://github.com/falcosecurity/falco' for more information
+See URL <https://falco.org> for more information
 about Falco."
     (let ((errors nil))
       (let ((message (car (flycheck-parse-json output))))
