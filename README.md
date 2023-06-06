@@ -1,4 +1,5 @@
 # flycheck-falco-rules - Flycheck for Falco rules files
+[![Falco Ecosystem Repository](https://github.com/falcosecurity/evolution/blob/main/repos/badges/falco-ecosystem-blue.svg)](https://github.com/falcosecurity/evolution/blob/main/REPOSITORIES.md#ecosystem-scope) [![Incubating](https://img.shields.io/badge/status-incubating-orange?style=for-the-badge)](https://github.com/falcosecurity/evolution/blob/main/REPOSITORIES.md#incubating)
 
 A custom checker for Falco rules files that can be loaded using the [Flycheck](https://www.flycheck.org/) syntax checker for GNU Emacs.
 
