@@ -1,4 +1,5 @@
 ;; flycheck-falco-rules-test.el --- Flycehck falco rules: Test suite
+;; SPDX-License-Identifier: Apache-2.0
 ;;
 ;; Copyright (C) 2022 The Falco Authors.
 ;;
