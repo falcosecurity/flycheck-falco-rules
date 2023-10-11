@@ -1,6 +1,7 @@
 ;;; flycheck-falco-rules.el --- On-the-fly syntax checking for falco rules files -*- lexical-binding: t; -*-
+;; SPDX-License-Identifier: Apache-2.0
 ;;
-;; Copyright (C) 2022 The Falco Authors.
+;; Copyright (C) 2023 The Falco Authors.
 ;;
 ;;
 ;; Licensed under the Apache License, Version 2.0 (the "License");
